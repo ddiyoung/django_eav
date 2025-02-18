@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from rest.views import SignInView, SignUpView
+from rest.views.signviews import SignInView, SignUpView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
