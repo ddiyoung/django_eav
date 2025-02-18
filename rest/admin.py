@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Table, Column
+from rest.models.eav_typed_column import Entity, Attribute, Value
 # Register your models here.
 
-admin.site.register(Table)
-admin.site.register(Column)
+
+admin.site.register(Entity)
+admin.site.register(Attribute)
+admin.site.register(Value)
