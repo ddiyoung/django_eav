@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path
 
 from rest.views.signviews import SignInView, SignUpView
+from rest.views.eavviews import ListCreateValueView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("signup/", SignUpView.as_view()),
     path("signin/", SignInView.as_view()),
+    path("eav/list-create/", ListCreateValueView.as_view()),
 ]

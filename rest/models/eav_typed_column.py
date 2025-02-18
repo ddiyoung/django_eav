@@ -1,9 +1,19 @@
 # example of typed column approach
 from django.db import models
 
+from django.contrib.auth import get_user_model
+
 
 class Entity(models.Model):
     name = models.CharField(max_length=64)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name", "user"], name="unique_entity_per_user"
+            )
+        ]
 
 
 class Attribute(models.Model):
@@ -14,11 +24,11 @@ class Attribute(models.Model):
 class Value(models.Model):
     entity = models.ForeignKey(Entity, on_delete=models.CASCADE)
     attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
-    text_value = models.CharField(max_length=255)
-    integer_value = models.IntegerField()
-    float_value = models.FloatField()
-    date_value = models.DateTimeField()
-    boolean_value = models.BooleanField()
+    text_value = models.CharField(max_length=255, null=True)
+    integer_value = models.IntegerField(null=True)
+    float_value = models.FloatField(null=True)
+    date_value = models.DateTimeField(null=True)
+    boolean_value = models.BooleanField(null=True)
 
     @property
     def value(self):
